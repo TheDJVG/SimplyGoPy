@@ -5,17 +5,13 @@ with open("README.md", "r") as fh:
 
 packages = ['simplygo']
 
-scripts = ['simplygo-encrypt', 'simplygo-decrypt']
-
 requires = [
-    'pycryptodome',
     'requests'
 ]
 
 setuptools.setup(
     name='simplygopy',
-    version='2019.9.1',
-    scripts=scripts,
+    version='2020.2.1',
     install_requires=requires,
     author="D. van Gorkum",
     author_email="djvg@djvg.net",

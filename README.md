@@ -14,22 +14,13 @@ Currently basic features are supported:
 
 Authentication
 ------------
-SimplyGo uses AES-CBC encryption when sending username and password to their API. The key/initialization vector are statically stored in `p014sg.transitlink.base.Constants` (from their Android application). 
-You can encrypt your username (e-mail address) and password by running:
-``` {.sourceCode .bash}
-$ simplygo-encrypt mailbox@example.com
-LOF3yVaERNdbNxfw1ctm63Dwqbx8ha98UR7GUEby3Pw=
-```
-Or use `simplygo-decrypt` to do the opposite:
-``` {.sourceCode .bash}
-$ simplygo-decrypt LOF3yVaERNdbNxfw1ctm63Dwqbx8ha98UR7GUEby3Pw=
-mailbox@example.com
-```
-You can use the pre-encrypted values when starting the `simplygo` module:
-``` {.sourceCode .python}
-import simplygo
-talk = simplygo.Ride('< encrypted username>', '<encrypted password>')
-```
+These days encryption is no longer needed, the username and password are send in plaintext over HTTPS and signed with
+an HMAC signature.  
+
+Old:
+
+SimplyGo used to use AES-CBC encryption when sending username and password to their API. The key/initialization vector were statically stored in `p014sg.transitlink.base.Constants` (from their Android application).
+ 
 Installation
 ------------
 Simple using pip:

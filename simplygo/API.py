@@ -2,7 +2,6 @@ import requests
 import json
 import logging
 from enum import Enum
-from simplygo.CryptLib import CryptLib
 from simplygo import Constants, Utility, JsonFields
 
 logger = logging.getLogger(__name__)
@@ -24,24 +23,9 @@ class API:
         # Store session information here
         self.session_info = None
 
-        # Crypt lib reverse engineered from SimplyGo app.
-        simply_crypt = CryptLib()
-
-        # Try to decrypt user_name and make sure it's encrypted.
-        try:
-            user_name = simply_crypt.decrypt(user_name)
-        except ValueError:
-            logger.debug("User name was not entered encrypted.")
-        finally:
-            self.user_name = simply_crypt.encrypt(user_name)
-
-        # Try to decrypt user_password and make sure it's encrypted.
-        try:
-            user_pass = simply_crypt.decrypt(user_pass)
-        except ValueError:
-            logger.debug("User password was not entered encrypted.")
-        finally:
-            self.user_pass = simply_crypt.encrypt(user_pass)
+        # SimplyGO App login credentials.
+        self.user_name = user_name
+        self.user_pass = user_pass
 
         if not self._resume_session():
             self._authenticate()
@@ -91,7 +75,8 @@ class API:
             return False
 
     def _query_api(self, endpoint: str, data: json, method: HttpMethod):
-        headers = {'Authorization': Utility.encodeHmacSHA256(endpoint, method.value), 'Accept': 'application/json'}
+        headers = {'Authorization': Utility.encodeHmacSHA256(endpoint, method.value), 'Accept': 'application/json',
+                   'Content-type': 'application/json'}
         logger.debug("Signature: %r", headers.get('Authorization'))
         logging.debug("Payload: %r", data)
         try:

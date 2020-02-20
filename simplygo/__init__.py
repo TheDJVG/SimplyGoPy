@@ -1,7 +1,6 @@
 import logging
 from builtins import str, isinstance, Exception
 
-from simplygo.CryptLib import CryptLib
 from simplygo.API import API, SimplyGoError, SimplyGoApiError
 from simplygo import Constants, Utility, JsonFields
 from datetime import date, datetime
@@ -19,15 +18,7 @@ class Ride:
         self.card_info = None
 
     def _set_user_info(self):
-        data = self.simplygo_api.query_api(Constants.API_ABT_USER_DETAIL)
-        for key, value in data.items():
-            # Try decrypting data but not password.
-            if isinstance(key, str) and key not in ['Password']:
-                try:
-                    data[key] = CryptLib().decrypt(value)
-                except Exception:
-                    continue
-        self.user_info = data
+        self.user_info = self.simplygo_api.query_api(Constants.API_ABT_USER_DETAIL)
 
     def _set_card_info(self):
         self.card_info = self.simplygo_api.query_api(Constants.API_ABT_GET_CARD_LIST)
