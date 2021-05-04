@@ -50,7 +50,7 @@ Get user information:
 import simplygo
 from pprint import pprint
 rider = simplygo.Ride('<username>', '<password>')
-pprint(rider.get_card_info())
+pprint(rider.get_user_info())
 ```
 Get transactions of today:
 ``` {.sourceCode .python}

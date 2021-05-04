@@ -5,7 +5,7 @@ ABT_APP_ID = "e62e7c778eed4b5ba220a8d3c512a555"
 ABT_APP_KEY = "hbssWNf65LyAuYomc4HQTzopBw0MPOY/llZ54mTeKNM="
 
 # Used for Device object
-API_APP_VERSION = "6.0.0"
+API_APP_VERSION = "6.2.0"
 
 # Fields used for API communication
 ABT_API_URL = 'https://abtapp.transitlink.com.sg/'

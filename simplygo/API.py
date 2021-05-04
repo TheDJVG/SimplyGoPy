@@ -3,6 +3,7 @@ import json
 import logging
 from enum import Enum
 from simplygo import Constants, Utility, JsonFields
+from urllib3.util import SKIP_HEADER
 
 logger = logging.getLogger(__name__)
 
@@ -76,7 +77,8 @@ class API:
 
     def _query_api(self, endpoint: str, data: json, method: HttpMethod):
         headers = {'Authorization': Utility.encodeHmacSHA256(endpoint, method.value), 'Accept': 'application/json',
-                   'Content-type': 'application/json'}
+                   'Content-type': 'application/json',
+                   'User-Agent': SKIP_HEADER}
         logger.debug("Signature: %r", headers.get('Authorization'))
         logging.debug("Payload: %r", data)
         try:
